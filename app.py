@@ -74,7 +74,7 @@ class ResumeApp:
             "📊 DASHBOARD": self.render_dashboard,
             "🎯 JOB SEARCH": self.render_job_search,
             "💬 FEEDBACK": self.render_feedback_page,
-            "ℹ️ ABOUT": self.render_about,
+            # "ℹ️ ABOUT": self.render_about,
             "🤖 Chatbot": self.render_chatbot
         }
         
