@@ -74,8 +74,9 @@ class ResumeApp:
             "📊 DASHBOARD": self.render_dashboard,
             "🎯 JOB SEARCH": self.render_job_search,
             "💬 FEEDBACK": self.render_feedback_page,
-            # "ℹ️ ABOUT": self.render_about,
-            "🤖 Chatbot": self.render_chatbot
+            "ℹ️ ABOUT": self.render_about,
+            "🤖 Chatbot": self.render_chatbot,
+            "🕵️ Job Scam detector": self.render_job_scam_detector,
         }
         
         # Initialize dashboard manager
@@ -881,9 +882,12 @@ class ResumeApp:
             except:
                 return None
         
-        # Get image path and convert to base64
-        image_path = os.path.join(os.path.dirname(__file__), "assets", "124852522.jpeg")
-        image_base64 = get_image_as_base64(image_path)
+        # Get default placeholder images (replace with actual image paths when available)
+        madhav_image_path = os.path.join(os.path.dirname(__file__), "assets", "madhav.jpeg")
+        manekas_image_path = os.path.join(os.path.dirname(__file__), "assets", "manekas.jpeg")
+        
+        madhav_image_base64 = get_image_as_base64(madhav_image_path)
+        manekas_image_base64 = get_image_as_base64(manekas_image_path)
         
         apply_modern_styles()
         
@@ -1009,6 +1013,37 @@ class ResumeApp:
                     color: #ddd;
                     line-height: 1.6;
                 }
+                
+                /* New styles for the team layout */
+                .team-section {
+                    text-align: center;
+                    margin: 3rem auto;
+                    max-width: 1000px;
+                }
+                
+                .team-header {
+                    font-size: 2.5rem;
+                    color: white;
+                    margin-bottom: 2rem;
+                }
+                
+                .team-grid {
+                    display: grid;
+                    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+                    gap: 2rem;
+                }
+                
+                .team-member {
+                    background: rgba(45, 45, 45, 0.9);
+                    border-radius: 20px;
+                    padding: 2rem;
+                    transition: transform 0.3s ease;
+                }
+                
+                .team-member:hover {
+                    transform: translateY(-10px);
+                    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+                }
             </style>
         """, unsafe_allow_html=True)
         
@@ -1020,32 +1055,73 @@ class ResumeApp:
             </div>
         """, unsafe_allow_html=True)
         
-        # Profile Section
+        # Team Section
+        st.markdown("""
+            <div class="team-section">
+                <h2 class="team-header">Meet Our Team</h2>
+                <div class="team-grid">
+        """, unsafe_allow_html=True)
+        
+        # Madhav's Profile
         st.markdown(f"""
-            <div class="profile-section">
-                <img src="{image_base64 if image_base64 else 'https://avatars.githubusercontent.com/Hunterdii'}" 
-                     alt="Het Patel" 
+            <div class="team-member">
+                <img src="{madhav_image_base64 if madhav_image_base64 else 'https://via.placeholder.com/200'}" 
+                     alt="Madhav Kalra" 
                      class="profile-image"
-                     onerror="this.onerror=null; this.src='https://avatars.githubusercontent.com/Hunterdii';">
-                <h2 class="profile-name">Het Patel (Hunterdii)</h2>
-                <p class="profile-title">Full Stack Developer & AI/ML Enthusiast</p>
+                     onerror="this.onerror=null; this.src='https://via.placeholder.com/200';">
+                <h2 class="profile-name">Madhav Kalra</h2>
+                <p class="profile-title">Full Stack Developer & AI Specialist</p>
                 <div class="social-links">
-                    <a href="https://github.com/Hunterdii" class="social-link" target="_blank">
+                    <a href="https://github.com/madhavkalra7" class="social-link" target="_blank">
                         <i class="fab fa-github"></i>
                     </a>
-                    <a href="https://www.linkedin.com/in/patel-hetkumar-sandipbhai-8b110525a/" class="social-link" target="_blank">
+                    <a href="https://www.linkedin.com/in/madhav-kalra?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" class="social-link" target="_blank">
                         <i class="fab fa-linkedin"></i>
                     </a>
-                    <a href="mailto:hunterdii9879@gmail.com" class="social-link" target="_blank">
+                    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=madhavkalra2005@gmail.com" class="social-link" target="_blank">
                         <i class="fas fa-envelope"></i>
                     </a>
                 </div>
                 <p class="bio-text">
-                    Hello! I'm a passionate Full Stack Developer with expertise in AI and Machine Learning. 
-                    I created Smart Resume AI to revolutionize how job seekers approach their career journey. 
-                    With my background in both software development and AI, I've designed this platform to 
-                    provide intelligent, data-driven insights for resume optimization.
+                    Hello! I'm Madhav, a passionate Full Stack Developer with expertise in AI technologies.
+                    With my background in software development and machine learning, I've collaborated on
+                    Smart Resume AI to create an intelligent platform that helps job seekers optimize their 
+                    career materials using data-driven insights.
                 </p>
+            </div>
+        """, unsafe_allow_html=True)
+        
+        # Manekas's Profile
+        st.markdown(f"""
+            <div class="team-member">
+                <img src="{manekas_image_base64 if manekas_image_base64 else 'https://via.placeholder.com/200'}" 
+                     alt="Manekas Singh" 
+                     class="profile-image"
+                     onerror="this.onerror=null; this.src='https://via.placeholder.com/200';">
+                <h2 class="profile-name">Manekas Singh</h2>
+                <p class="profile-title">ML Engineer & UX Designer</p>
+                <div class="social-links">
+                    <a href="https://github.com/manekasingh05/manekasingh05" class="social-link" target="_blank">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/manekas-singh-540945329/" class="social-link" target="_blank">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=2005manekassingh@gmail.com" class="social-link" target="_blank">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                </div>
+                <p class="bio-text">
+                    I'm Manekas, specializing in Machine Learning and User Experience design. 
+                    My passion lies in creating intuitive AI-powered applications that solve real-world problems.
+                    Through Smart Resume AI, I aim to combine advanced algorithms with user-friendly design
+                    to help professionals present their best selves to potential employers.
+                </p>
+            </div>
+        """, unsafe_allow_html=True)
+        
+        st.markdown("""
+                </div>
             </div>
         """, unsafe_allow_html=True)
         
@@ -1055,7 +1131,7 @@ class ResumeApp:
                 <i class="fas fa-lightbulb vision-icon"></i>
                 <h2 class="vision-title">Our Vision</h2>
                 <p class="vision-text">
-                    "Smart Resume AI represents my vision of democratizing career advancement through technology. 
+                    "Smart Resume AI represents our shared vision of democratizing career advancement through technology. 
                     By combining cutting-edge AI with intuitive design, this platform empowers job seekers at 
                     every career stage to showcase their true potential and stand out in today's competitive job market."
                 </p>
@@ -1497,7 +1573,70 @@ class ResumeApp:
                 <iframe src="{chatbot_url}"></iframe>
             </div>
         """, unsafe_allow_html=True)
-
+        
+    def render_job_scam_detector(self):
+        """Render the job scam detector page with embedded iframe to the deployed project"""
+        # Apply modern styles (if available in your project)
+        from ui_components import apply_modern_styles
+        import time
+        
+        apply_modern_styles()
+        
+        # Simple header
+        st.header("Job Scam Detector")
+        
+        # Show a Streamlit native spinner instead of custom CSS
+        with st.spinner("Loading JobShield..."):
+            # Create columns for centering the iframe
+            col1, col2, col3 = st.columns([1, 10, 1])
+            
+            with col2:
+                # Add simple CSS for the iframe
+                st.markdown("""
+                    <style>
+                        .iframe-container {
+                            width: 100%;
+                            height: 800px;
+                            border-radius: 10px;
+                            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+                            background: #f5f5f5;
+                            overflow: hidden;
+                        }
+                    </style>
+                """, unsafe_allow_html=True)
+                
+                # Display iframe with simpler implementation
+                st.markdown("""
+                    <div class="iframe-container">
+                        <iframe 
+                            src="https://v0-jobshield2.vercel.app" 
+                            width="100%" 
+                            height="100%" 
+                            frameborder="0"
+                            title="Job Scam Detector">
+                        </iframe>
+                    </div>
+                """, unsafe_allow_html=True)
+                
+                # Give some time for the iframe to load
+                time.sleep(3)
+        
+        # Add backup options in case of loading issues
+        st.divider()
+        st.write("Having trouble seeing JobShield? Try one of these options:")
+        
+        col1, col2 = st.columns(2)
+        
+        with col1:
+            if st.button("Refresh the Page", type="primary"):
+                st.rerun()
+        
+        with col2:
+            # Direct link as a fallback
+            st.markdown("[Open JobShield in a new tab](https://v0-jobshield2.vercel.app)")
+            
+        # Additional help text
+        st.info("If JobShield still doesn't appear, please check your internet connection or try again later.")
 
 
 
